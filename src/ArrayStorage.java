@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 /**
  * Array based storage for Resumes
  */
@@ -29,21 +27,20 @@ public class ArrayStorage {
         for (int i = 0; i < storage.length; i++) {
             if (storage[i] != null && uuid == storage[i].uuid){
                 return storage[i];
-            } else {
-                System.out.println("\nNo such ID");
-                break;
             }
         }
         return null;
     }
 
     void delete(String uuid) {
+        //Set element to null
         for (int i = 0; i < storage.length; i++) {
             if (storage[i].uuid == uuid){
                 storage[i] = null;
                 break;
             }
         }
+        //Move all elements to the left by 1 index
         for (int i = 0; i < storage.length; i++) {
             if (storage[i] == null && i < storage.length - 1) {
                 storage[i] = storage[i+1];
@@ -67,9 +64,16 @@ public class ArrayStorage {
                 break;
             }
         }
-
-        storage = Arrays.copyOf(storage, Counter);
-        return storage;
+        
+        Resume[] data = new Resume[Counter];
+        for (int i = 0, j = 0; i < storage.length; i++, j++) {
+            if (storage[i] != null) {
+                data[i] = storage[j];
+            } else {
+                break;
+            }
+        }
+        return data;
     }
 
     int size() {
