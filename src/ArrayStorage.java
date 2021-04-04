@@ -3,6 +3,7 @@
  */
 public class ArrayStorage {
     Resume[] storage = new Resume[10];
+    int size;
 
     void clear() {
         for (int i = 0; i < storage.length; i++) {
@@ -12,12 +13,14 @@ public class ArrayStorage {
                 break;
             }
         }
+        size = 0;
     }
 
     void save(Resume r) {
         for (int i = 0; i < storage.length; i++) {
             if (storage[i] == null) {
                 storage[i] = r;
+                size++;
                 break;
             }
         }
@@ -37,6 +40,7 @@ public class ArrayStorage {
         for (int i = 0; i < storage.length; i++) {
             if (storage[i].uuid == uuid){
                 storage[i] = null;
+                size--;
                 break;
             }
         }
@@ -64,7 +68,7 @@ public class ArrayStorage {
                 break;
             }
         }
-        
+
         Resume[] data = new Resume[Counter];
         for (int i = 0, j = 0; i < storage.length; i++, j++) {
             if (storage[i] != null) {
@@ -77,14 +81,6 @@ public class ArrayStorage {
     }
 
     int size() {
-        int size = 0;
-        for (int i = 0; i < storage.length; i++) {
-            if (storage[i] == null) {
-                break;
-            } else {
-                size++;
-            }
-        }
         return size;
     }
 }
